@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      containers:
+        - name: web-server1
+          image: adhamgamal74/web-server:v1
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: web-server-config
